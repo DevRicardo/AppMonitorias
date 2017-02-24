@@ -41,7 +41,7 @@
 
 <!-- Fixed navbar -->
 <div id="navigation" class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
+    <div class="container" style="padding-left: 0px; padding-right: 0px;">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
@@ -52,13 +52,13 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#home" class="smoothScroll">Home</a></li>
-                <li><a href="#about" class="smoothScroll">About</a></li>
-                <li><a href="#contact" class="smoothScroll">Contact</a></li>
+                <li class="active"><a href="#home" class="smoothScroll">Inicio</a></li>
+                <li><a href="#about" class="smoothScroll">Acerca de</a></li>
+                <li><a href="#contact" class="smoothScroll">Contacto</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::guest())
-                    <li><a href="{{ url('/login') }}">Login</a></li>
+                    <li><a href="{{ url('/login') }}">Ingresar</a></li>
                     <!--<li><a href="{{ url('/register') }}">Register</a></li>-->
                 @else
                     <li><a href="{{ url(config('laraadmin.adminRoute')) }}">{{ Auth::user()->name }}</a></li>
@@ -74,24 +74,24 @@
     <div class="container">
         <div class="row centered">
             <div class="col-lg-12">
-                <h1>{{ LAConfigs::getByKey('sitename_part1') }} <b><a>{{ LAConfigs::getByKey('sitename_part2') }}</a></b></h1>
+                <!--<h1>{{ LAConfigs::getByKey('sitename_part1') }} <b><a>{{ LAConfigs::getByKey('sitename_part2') }}</a></b></h1>-->
                 <h3>{{ LAConfigs::getByKey('site_description') }}</h3>
-                <h3><a href="{{ url('/login') }}" class="btn btn-lg btn-success">Get Started!</a></h3><br>
+                <h3><a href="{{ url('/login') }}" class="btn btn-lg btn-success">Registrate como monitor!</a></h3><br>
             </div>
-            <div class="col-lg-2">
+            <!--<div class="col-lg-2">
                 <h5>Amazing Functionalities</h5>
                 <p>for Modern Admin Panels</p>
                 <img class="hidden-xs hidden-sm hidden-md" src="{{ asset('/la-assets/img/arrow1.png') }}">
+            </div>-->
+            <div class="col-lg-12">
+                <img class="img-responsive" src="{{ asset('/la-assets/img/fondo1.jpg') }}" alt="">
             </div>
-            <div class="col-lg-8">
-                <img class="img-responsive" src="{{ asset('/la-assets/img/app-bg.png') }}" alt="">
-            </div>
-            <div class="col-lg-2">
+            <!--<div class="col-lg-2">
                 <br>
                 <img class="hidden-xs hidden-sm hidden-md" src="{{ asset('/la-assets/img/arrow2.png') }}">
                 <h5>Completely Packaged...</h5>
                 <p>for Future expantion of Modules</p>
-            </div>
+            </div>-->
         </div>
     </div> <!--/ .container -->
 </div><!--/ #headerwrap -->

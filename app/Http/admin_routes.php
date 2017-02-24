@@ -71,7 +71,15 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	Route::post(config('laraadmin.adminRoute') . '/create_backup_ajax', 'LA\BackupsController@create_backup_ajax');
 	Route::get(config('laraadmin.adminRoute') . '/downloadBackup/{id}', 'LA\BackupsController@downloadBackup');
 
-	/* ================== Estudiantes ================== */
-	Route::resource(config('laraadmin.adminRoute') . '/estudiantes', 'LA\EstudiantesController');
-	Route::get(config('laraadmin.adminRoute') . '/estudiante_dt_ajax', 'LA\EstudiantesController@dtajax');
+
+
+	
+
+	/* ================== Facultads ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/facultads', 'LA\FacultadsController');
+	Route::get(config('laraadmin.adminRoute') . '/facultad_dt_ajax', 'LA\FacultadsController@dtajax');
+
+	/* ================== Programas ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/programas', 'LA\ProgramasController');
+	Route::get(config('laraadmin.adminRoute') . '/programa_dt_ajax', 'LA\ProgramasController@dtajax');
 });

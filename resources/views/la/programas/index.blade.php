@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
-@section("contentheader_title", "Estudiantes")
-@section("contentheader_description", "Estudiantes listing")
-@section("section", "Estudiantes")
+@section("contentheader_title", "Programas")
+@section("contentheader_description", "Programas listing")
+@section("section", "Programas")
 @section("sub_section", "Listing")
-@section("htmlheader_title", "Estudiantes Listing")
+@section("htmlheader_title", "Programas Listing")
 
 @section("headerElems")
-@la_access("Estudiantes", "create")
-	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Add Estudiante</button>
+@la_access("Programas", "create")
+	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Add Programa</button>
 @endla_access
 @endsection
 
@@ -45,26 +45,22 @@
 	</div>
 </div>
 
-@la_access("Estudiantes", "create")
+@la_access("Programas", "create")
 <div class="modal fade" id="AddModal" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Add Estudiante</h4>
+				<h4 class="modal-title" id="myModalLabel">Add Programa</h4>
 			</div>
-			{!! Form::open(['action' => 'LA\EstudiantesController@store', 'id' => 'estudiante-add-form']) !!}
+			{!! Form::open(['action' => 'LA\ProgramasController@store', 'id' => 'programa-add-form']) !!}
 			<div class="modal-body">
 				<div class="box-body">
                     @la_form($module)
 					
 					{{--
-					@la_input($module, 'nombres')
-					@la_input($module, 'apellidos')
-					@la_input($module, 'tipo_doc')
-					@la_input($module, 'num_identificacion')
-					@la_input($module, 'edad')
-					@la_input($module, 'role_id')
+					@la_input($module, 'nombre_progama')
+					@la_input($module, 'facultad_id')
 					--}}
 				</div>
 			</div>
@@ -91,7 +87,7 @@ $(function () {
 	$("#example1").DataTable({
 		processing: true,
         serverSide: true,
-        ajax: "{{ url(config('laraadmin.adminRoute') . '/estudiante_dt_ajax') }}",
+        ajax: "{{ url(config('laraadmin.adminRoute') . '/programa_dt_ajax') }}",
 		language: {
 			lengthMenu: "_MENU_",
 			search: "_INPUT_",
@@ -101,7 +97,7 @@ $(function () {
 		columnDefs: [ { orderable: false, targets: [-1] }],
 		@endif
 	});
-	$("#estudiante-add-form").validate({
+	$("#programa-add-form").validate({
 		
 	});
 });

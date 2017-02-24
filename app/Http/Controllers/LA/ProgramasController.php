@@ -17,37 +17,37 @@ use Collective\Html\FormFacade as Form;
 use Dwij\Laraadmin\Models\Module;
 use Dwij\Laraadmin\Models\ModuleFields;
 
-use App\Models\Estudiante;
+use App\Models\Programa;
 
-class EstudiantesController extends Controller
+class ProgramasController extends Controller
 {
 	public $show_action = true;
-	public $view_col = 'num_identificacion';
-	public $listing_cols = ['id', 'nombres', 'apellidos', 'tipo_doc', 'num_identificacion', 'edad', 'role_id'];
+	public $view_col = 'facultad_id';
+	public $listing_cols = ['id', 'nombre_progama', 'facultad_id'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns
 		if(\Dwij\Laraadmin\Helpers\LAHelper::laravel_ver() == 5.3) {
 			$this->middleware(function ($request, $next) {
-				$this->listing_cols = ModuleFields::listingColumnAccessScan('Estudiantes', $this->listing_cols);
+				$this->listing_cols = ModuleFields::listingColumnAccessScan('Programas', $this->listing_cols);
 				return $next($request);
 			});
 		} else {
-			$this->listing_cols = ModuleFields::listingColumnAccessScan('Estudiantes', $this->listing_cols);
+			$this->listing_cols = ModuleFields::listingColumnAccessScan('Programas', $this->listing_cols);
 		}
 	}
 	
 	/**
-	 * Display a listing of the Estudiantes.
+	 * Display a listing of the Programas.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index()
 	{
-		$module = Module::get('Estudiantes');
+		$module = Module::get('Programas');
 		
 		if(Module::hasAccess($module->id)) {
-			return View('la.estudiantes.index', [
+			return View('la.programas.index', [
 				'show_actions' => $this->show_action,
 				'listing_cols' => $this->listing_cols,
 				'module' => $module
@@ -58,7 +58,7 @@ class EstudiantesController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new estudiante.
+	 * Show the form for creating a new programa.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -68,16 +68,16 @@ class EstudiantesController extends Controller
 	}
 
 	/**
-	 * Store a newly created estudiante in database.
+	 * Store a newly created programa in database.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request)
 	{
-		if(Module::hasAccess("Estudiantes", "create")) {
+		if(Module::hasAccess("Programas", "create")) {
 		
-			$rules = Module::validateRules("Estudiantes", $request);
+			$rules = Module::validateRules("Programas", $request);
 			
 			$validator = Validator::make($request->all(), $rules);
 			
@@ -85,11 +85,9 @@ class EstudiantesController extends Controller
 				return redirect()->back()->withErrors($validator)->withInput();
 			}
 			
-			$insert_id = Module::insert("Estudiantes", $request);
-
+			$insert_id = Module::insert("Programas", $request);
 			
-			
-			return redirect()->route(config('laraadmin.adminRoute') . '.estudiantes.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.programas.index');
 			
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
@@ -97,30 +95,30 @@ class EstudiantesController extends Controller
 	}
 
 	/**
-	 * Display the specified estudiante.
+	 * Display the specified programa.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show($id)
 	{
-		if(Module::hasAccess("Estudiantes", "view")) {
+		if(Module::hasAccess("Programas", "view")) {
 			
-			$estudiante = Estudiante::find($id);
-			if(isset($estudiante->id)) {
-				$module = Module::get('Estudiantes');
-				$module->row = $estudiante;
+			$programa = Programa::find($id);
+			if(isset($programa->id)) {
+				$module = Module::get('Programas');
+				$module->row = $programa;
 				
-				return view('la.estudiantes.show', [
+				return view('la.programas.show', [
 					'module' => $module,
 					'view_col' => $this->view_col,
 					'no_header' => true,
 					'no_padding' => "no-padding"
-				])->with('estudiante', $estudiante);
+				])->with('programa', $programa);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
-					'record_name' => ucfirst("estudiante"),
+					'record_name' => ucfirst("programa"),
 				]);
 			}
 		} else {
@@ -129,28 +127,28 @@ class EstudiantesController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified estudiante.
+	 * Show the form for editing the specified programa.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit($id)
 	{
-		if(Module::hasAccess("Estudiantes", "edit")) {			
-			$estudiante = Estudiante::find($id);
-			if(isset($estudiante->id)) {	
-				$module = Module::get('Estudiantes');
+		if(Module::hasAccess("Programas", "edit")) {			
+			$programa = Programa::find($id);
+			if(isset($programa->id)) {	
+				$module = Module::get('Programas');
 				
-				$module->row = $estudiante;
+				$module->row = $programa;
 				
-				return view('la.estudiantes.edit', [
+				return view('la.programas.edit', [
 					'module' => $module,
 					'view_col' => $this->view_col,
-				])->with('estudiante', $estudiante);
+				])->with('programa', $programa);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
-					'record_name' => ucfirst("estudiante"),
+					'record_name' => ucfirst("programa"),
 				]);
 			}
 		} else {
@@ -159,7 +157,7 @@ class EstudiantesController extends Controller
 	}
 
 	/**
-	 * Update the specified estudiante in storage.
+	 * Update the specified programa in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  int  $id
@@ -167,9 +165,9 @@ class EstudiantesController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		if(Module::hasAccess("Estudiantes", "edit")) {
+		if(Module::hasAccess("Programas", "edit")) {
 			
-			$rules = Module::validateRules("Estudiantes", $request, true);
+			$rules = Module::validateRules("Programas", $request, true);
 			
 			$validator = Validator::make($request->all(), $rules);
 			
@@ -177,9 +175,9 @@ class EstudiantesController extends Controller
 				return redirect()->back()->withErrors($validator)->withInput();;
 			}
 			
-			$insert_id = Module::updateRow("Estudiantes", $request, $id);
+			$insert_id = Module::updateRow("Programas", $request, $id);
 			
-			return redirect()->route(config('laraadmin.adminRoute') . '.estudiantes.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.programas.index');
 			
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
@@ -187,18 +185,18 @@ class EstudiantesController extends Controller
 	}
 
 	/**
-	 * Remove the specified estudiante from storage.
+	 * Remove the specified programa from storage.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy($id)
 	{
-		if(Module::hasAccess("Estudiantes", "delete")) {
-			Estudiante::find($id)->delete();
+		if(Module::hasAccess("Programas", "delete")) {
+			Programa::find($id)->delete();
 			
 			// Redirecting to index() method
-			return redirect()->route(config('laraadmin.adminRoute') . '.estudiantes.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.programas.index');
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
 		}
@@ -211,11 +209,11 @@ class EstudiantesController extends Controller
 	 */
 	public function dtajax()
 	{
-		$values = DB::table('estudiantes')->select($this->listing_cols)->whereNull('deleted_at');
+		$values = DB::table('programas')->select($this->listing_cols)->whereNull('deleted_at');
 		$out = Datatables::of($values)->make();
 		$data = $out->getData();
 
-		$fields_popup = ModuleFields::getModuleFields('Estudiantes');
+		$fields_popup = ModuleFields::getModuleFields('Programas');
 		
 		for($i=0; $i < count($data->data); $i++) {
 			for ($j=0; $j < count($this->listing_cols); $j++) { 
@@ -224,7 +222,7 @@ class EstudiantesController extends Controller
 					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
 				}
 				if($col == $this->view_col) {
-					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/estudiantes/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
+					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/programas/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
 				}
 				// else if($col == "author") {
 				//    $data->data[$i][$j];
@@ -233,12 +231,12 @@ class EstudiantesController extends Controller
 			
 			if($this->show_action) {
 				$output = '';
-				if(Module::hasAccess("Estudiantes", "edit")) {
-					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/estudiantes/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
+				if(Module::hasAccess("Programas", "edit")) {
+					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/programas/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
 				}
 				
-				if(Module::hasAccess("Estudiantes", "delete")) {
-					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.estudiantes.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
+				if(Module::hasAccess("Programas", "delete")) {
+					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.programas.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
 					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
 					$output .= Form::close();
 				}
