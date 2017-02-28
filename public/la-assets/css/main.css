@@ -130,7 +130,7 @@ a:after {
 }
 
 #footerwrap {
-	background-color: #2f2f2f;
+	background-color: rgb(228, 100, 2);
 	color: white;
 	padding-top: 40px;
 	padding-bottom: 60px;
@@ -150,7 +150,7 @@ a:after {
 /* Copyright Wrap */
 
 #c {
-	background: #222222;
+	background-color: #707e90;
 	padding-top: 15px;
 	text-align: center;
 }

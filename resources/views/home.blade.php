@@ -26,7 +26,7 @@
 	<link href="{{ asset('la-assets/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
     
     <!-- Custom styles for this template -->
-    <link href="{{ asset('/la-assets/css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('/la-assets/css/main.css?'.date("Y-m-d-h-i-s")) }}" rel="stylesheet">
 
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
@@ -48,7 +48,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><b>{{ LAConfigs::getByKey('sitename') }}</b></a>
+            <a class="navbar-brand" style="margin-right: 20px; padding-top:  5px;" href="#">
+                <img class="img-responsive" src="{{ asset('/la-assets/img/upb_logo.png') }}" width="100" alt="">
+            <!--<b>
+            {{ LAConfigs::getByKey('sitename') }}
+            </b>-->
+            </a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -102,23 +107,23 @@
 <div id="intro">
     <div class="container">
         <div class="row centered">
-            <h1>An Architecture designed To Excel</h1>
+            <h1>Monitorias academicas</h1>
             <br>
             <br>
             <div class="col-lg-4">
-                <i class="fa fa-cubes" style="font-size:100px;height:110px;"></i>
-                <h3>Modular</h3>
-                <p>Making Data Management fast and enjoyable.</p>
+                <i class="fa fa-info" style="font-size:100px;height:110px;"></i>
+                <h3>Informate de las monitorias</h3>
+                
             </div>
             <div class="col-lg-4">
                 <i class="fa fa-paper-plane" style="font-size:100px;height:110px;"></i>
-                <h3>Easy to Install</h3>
-                <p>With single installation command.</p>
+                <h3>Inscripción para monitores</h3>
+                
             </div>
             <div class="col-lg-4">
-                <i class="fa fa-cubes" style="font-size:100px;height:110px;"></i>
-                <h3>Customizable</h3>
-                <p>Easy to Manipulation the flows.</p>
+                <i class="fa fa-university" style="font-size:100px;height:110px;"></i>
+                <h3>Inscripción para estudiantes</h3>
+                
             </div>
         </div>
         <br>
@@ -131,26 +136,25 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-5 centered">
-                <img class="centered" src="{{ asset('/la-assets/img/mobile.png') }}" alt="">
+                <img class="img-responsive" src="{{ asset('/la-assets/img/monitorias.jpg') }}" alt="">
             </div>
 
             <div class="col-lg-7">
-				<h3 class="feature-title">What is LaraAdmin ?</h3><br>
+				<h3 class="feature-title">Requisitos para monitores</h3><br>
+                <p>Para ser  monitor docente un estudiante debe cumplir con los siguientes requisitos:</p>
+                <br>
 				<ol class="features">
-					<li><strong>CMS</strong> (Content Management System) &#8211; Manages Modules &amp; their Data</li>
-					<li>Backend <strong>Admin Panel</strong> &#8211; Data can be used in front end applications with ease.</li>
-					<li>A probable <strong>CRM</strong> System &#8211; Can be evolved into a CRM system like <a target="_blank" href="https://www.sugarcrm.com">SugarCRM</a></li>
+					<li>Tener un promedio crédito igual o superior a 3.50 en el período  inmediatamente anterior. </li>
+					<li>No haber recibido sanciones disciplinarias.</li>
+					<li>Haber aprobado el curso objeto de Monitoría con una nota no inferior a 4.0</li>
+                    <li>Que en el horario en que ejerza la Monitoría no tenga obligaciones académicas en otros cursos.</li>
 				</ol><br>
+                <p>
+                    Para participar en la elección de Monitoría Docente, el estudiante debe presentar un escrito dirigido al Director de la Facultad, en el cual se debe identificar como estudiante de la Universidad y manifestar el curso al cual pretende ser monitor.  Se debe anexar fotocopia de la cédula de ciudadanía, fotocopia del carné de la Universidad e Historia Académica.
+                </p>
 
-				<h3 class="feature-title">Why LaraAdmin ?</h3><br>
-                <ol class="features">
-					<li><strong>Philosophy:</strong> Inspired by SugarCRM &amp; based on Advanced <strong>Data Types</strong> like Image, HTML, File, Dropdown, TagInput which makes developers job easy. See more in <a target="_blank" href="http://laraadmin.com/features">features</a></li>
-					<li>Superior <strong>CRUD generation</strong> for Modules which generates Migration, Controller, Model and Views with single artisan command and integrates with Routes as as well.</li>
-					<li><strong>Form Maker</strong> helper is provided for generating entire form with single function call with module name as single parameter. It also gives you freedom to customise form for every field by providing method to generate single field with parameters for customisations.</li>
-					<li><b>Upload Manager </b>manages project files &amp; images which are integrated with your Module fields.</li>
-					<li><strong>Menu Manager</strong> creates menu with Modules &amp; Custom Links likes WordPress</li>
-					<li><strong>Online Code Editor</strong> allows developers to customise the generated Module Views &amp; Files.</li>
-				</ol>
+				<br>
+               
             </div>
         </div>
     </div><!--/ .container -->
@@ -160,37 +164,35 @@
 <div id="footerwrap">
     <div class="container">
         <div class="col-lg-5">
-            <h3>Contact Us</h3><br>
+            <h3>Contacto</h3><br>
             <p>
-				Dwij IT Solutions,<br/>
-				Web Development Company in Pune,<br/>
-                B4, Patang Plaza Phase 5,<br/>
-                Opp. PICT College,<br/>
-                Katraj, Pune, India - 411046
+				Universidad Pontificia Bolivariana,<br/>
+				#68- a, Cq. 1 #68305, Medellín, Antioquia<br/>
+                4) 4488388<br/>
+                
             </p>
-			<div class="contact-link"><i class="fa fa-envelope-o"></i> <a href="mailto:hello@laraadmin.com">hello@laraadmin.com</a></div>
-			<div class="contact-link"><i class="fa fa-cube"></i> <a href="http://laraadmin.com">laraadmin.com</a></div>
-			<div class="contact-link"><i class="fa fa-building"></i> <a href="http://dwijitsolutions.com">dwijitsolutions.com</a></div>
+			<div class="contact-link" ><i class="fa fa-envelope-o"></i> <a style="color: #ffffff;" href="info@upb.edu.co">info@upb.edu.co</a></div>
+			<div class="contact-link"><i class="fa fa-building"></i> <a style="color: #ffffff;" href="https://www.upb.edu.co/es/home?seccional=monteria">www.upb.edu.co</a></div>
         </div>
 
         <div class="col-lg-7">
-            <h3>Drop Us A Line</h3>
+            <h3>Deja tu mensaje</h3>
             <br>
             <form role="form" action="#" method="post" enctype="plain">
                 <div class="form-group">
-                    <label for="name1">Your Name</label>
+                    <label for="name1">Nombre</label>
                     <input type="name" name="Name" class="form-control" id="name1" placeholder="Your Name">
                 </div>
                 <div class="form-group">
-                    <label for="email1">Email address</label>
+                    <label for="email1">Email</label>
                     <input type="email" name="Mail" class="form-control" id="email1" placeholder="Enter email">
                 </div>
                 <div class="form-group">
-                    <label>Your Text</label>
+                    <label>Mensaje</label>
                     <textarea class="form-control" name="Message" rows="3"></textarea>
                 </div>
                 <br>
-                <button type="submit" class="btn btn-large btn-success">SUBMIT</button>
+                <button type="submit" class="btn btn-large btn-success">Enviar</button>
             </form>
         </div>
     </div>
@@ -198,7 +200,7 @@
 <div id="c">
     <div class="container">
         <p>
-            <strong>Copyright &copy; 2016. Powered by <a href="https://dwijitsolutions.com"><b>Dwij IT Solutions</b></a>
+            <strong>Copyright &copy; 2017. Powered by <a style="color: #ffffff;" href="https://dwijitsolutions.com"><b>Universidad Pontificia Bolivariana</b></a>
         </p>
     </div>
 </div>
