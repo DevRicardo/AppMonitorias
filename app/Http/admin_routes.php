@@ -3,6 +3,9 @@
 /* ================== Homepage ================== */
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
+/* ================== Monitores ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/monitores', 'LA\MonitoresController');
+	Route::get(config('laraadmin.adminRoute') . '/monitore_dt_ajax', 'LA\MonitoresController@dtajax');
 Route::auth();
 
 /* ================== Access Uploaded Files ================== */
@@ -82,4 +85,6 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	/* ================== Programas ================== */
 	Route::resource(config('laraadmin.adminRoute') . '/programas', 'LA\ProgramasController');
 	Route::get(config('laraadmin.adminRoute') . '/programa_dt_ajax', 'LA\ProgramasController@dtajax');
+
+	
 });

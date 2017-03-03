@@ -81,7 +81,29 @@
             <div class="col-lg-12">
                 <!--<h1>{{ LAConfigs::getByKey('sitename_part1') }} <b><a>{{ LAConfigs::getByKey('sitename_part2') }}</a></b></h1>-->
                 <h3>{{ LAConfigs::getByKey('site_description') }}</h3>
-                <h3><a href="{{ url('/login') }}" class="btn btn-lg btn-success">Registrate como monitor!</a></h3><br>
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if (session()->has('flash_notification.message'))
+                    <div class="alert alert-{{ session('flash_notification.level') }}">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+                        {!! session('flash_notification.message') !!}
+                    </div>
+                @endif
+                
+                <h3>
+                <a href="#" class="btn btn-lg btn-success" data-toggle="modal" data-target="#AddModal">Registrate como monitor!</a>
+               
+                </h3>
+                <br>
             </div>
             <!--<div class="col-lg-2">
                 <h5>Amazing Functionalities</h5>
@@ -130,6 +152,47 @@
         <hr>
     </div> <!--/ .container -->
 </div><!--/ #introwrap -->
+
+
+
+<div class="modal fade" id="AddModal" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Registro para dictar monitorias</h4>
+            </div>
+            {!! Form::open(['action' => 'LA\MonitoresController@store', 'id' => 'monitore-add-form']) !!}
+            <div class="modal-body">
+                <div class="box-body">
+                    {{--@la_form($module)--}}
+                    
+                    
+                    @la_input($module, 'tipo_doc')
+                    @la_input($module, 'numero_doc')
+                    @la_input($module, 'nombre_monitor')
+                    @la_input($module, 'email_monitor')
+                    @la_input($module, 'apellido_monitor')
+                    @la_input($module, 'facultad_id')
+                    @la_input($module, 'programa_id')
+                    @la_input($module, 'promedio_credito')
+                    
+                    <input type="hidden" name="vista" id="vista" value="home">    
+
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                {!! Form::submit( 'Registrar', ['class'=>'btn btn-success']) !!}
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+
+
 
 <!-- FEATURES WRAP -->
 <div id="features">

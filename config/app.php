@@ -158,6 +158,7 @@ return [
 
 
         Dwij\Laraadmin\LAProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
 
     ],
 

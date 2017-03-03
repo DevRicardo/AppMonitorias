@@ -1,19 +1,20 @@
 @extends('la.layouts.auth')
 
 @section('htmlheader_title')
-    Log in
+    Igresar al Sistemas
 @endsection
 
 @section('content')
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ url('/home') }}"><b>{{ LAConfigs::getByKey('sitename_part1') }} </b>{{ LAConfigs::getByKey('sitename_part2') }}</a>
+            
+            <img class="img-responsive" src="{{ asset('/la-assets/img/upb_logo.png') }}"  alt="">
         </div>
 
     @if (count($errors) > 0)
         <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <strong>Whoops!</strong> Hay problemas con las credenciales<br><br>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -23,7 +24,7 @@
     @endif
 
     <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg">Inicia tu sesión</p>
     <form action="{{ url('/login') }}" method="post">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="form-group has-feedback">
@@ -38,19 +39,19 @@
             <div class="col-xs-8">
                 <div class="checkbox icheck">
                     <label>
-                        <input type="checkbox" name="remember"> Remember Me
+                        <input type="checkbox" name="remember"> Recuerdame
                     </label>
                 </div>
             </div><!-- /.col -->
             <div class="col-xs-4">
-                <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                <button type="submit" class="btn btn-primary btn-block btn-flat">Acceder</button>
             </div><!-- /.col -->
         </div>
     </form>
 
     @include('auth.partials.social_login')
 
-    <a href="{{ url('/password/reset') }}">I forgot my password</a><br>
+    <a href="{{ url('/password/reset') }}">Olvidé mi contraseña</a><br>
     <!--<a href="{{ url('/register') }}" class="text-center">Register a new membership</a>-->
 
 </div><!-- /.login-box-body -->

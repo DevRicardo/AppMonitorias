@@ -8,6 +8,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Dwij\Laraadmin\Models\Module;
+use Dwij\Laraadmin\Models\ModuleFields;
+use Collective\Html\FormFacade as Form;
+
+use App\Models\Monitore;
 
 /**
  * Class HomeController
@@ -32,10 +37,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $module = Module::get('Monitores');
         $roleCount = \App\Role::count();
 		if($roleCount != 0) {
 			if($roleCount != 0) {
-				return view('home');
+
+				return view('home',[
+                    'module' => $module
+                ]);
 			}
 		} else {
 			return view('errors.error', [
