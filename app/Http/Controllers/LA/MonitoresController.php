@@ -18,6 +18,10 @@ use Dwij\Laraadmin\Models\Module;
 use Dwij\Laraadmin\Models\ModuleFields;
 
 use App\Models\Monitore;
+use App\User;
+use App\Role;
+use Mail;
+use Log;
 
 class MonitoresController extends Controller
 {
@@ -86,6 +90,20 @@ class MonitoresController extends Controller
 			}
 			flash('Registro exitoso, Porfavor verifique su email para validar las credenciales de acceso', 'success');
 			$insert_id = Module::insert("Monitores", $request);
+
+			$user = User::create([
+				'name' => $request->nombre_monitor." ".$request->apellido_monitor,
+				'email' => $request->email_monitor,
+				'password' => bcrypt($request->numero_doc),
+				'context_id' => $insert_id,
+				'type' => "Monitor",
+			]);
+	
+			// update user role
+			$user->detachRoles();
+			$role = Role::find(4);
+			$user->attachRole($role);
+
 			if($insert_id){
 				return redirect()->back();
 			}

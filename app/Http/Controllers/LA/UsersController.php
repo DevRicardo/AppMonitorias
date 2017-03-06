@@ -83,6 +83,7 @@ class UsersController extends Controller
 			return redirect(config('laraadmin.adminRoute')."/");
 		}
 	}
+
 	
 	/**
 	 * Datatable Ajax fetch
