@@ -1,16 +1,19 @@
 @extends("la.layouts.app")
 
-@section("contentheader_title", "Users")
-@section("contentheader_description", "users listing")
+@section("contentheader_title", "Usuarios")
+@section("contentheader_description", "Listado de usuarios")
 @section("section", "Users")
 @section("sub_section", "Listing")
 @section("htmlheader_title", "Users Listing")
 
 @section("headerElems")
-
+@la_access("Users", "create")
+	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Crear usuario</button>
+@endla_access
 @endsection
 
 @section("main-content")
+
 
 @if (count($errors) > 0)
     <div class="alert alert-danger">
@@ -42,6 +45,43 @@
 		</table>
 	</div>
 </div>
+
+
+
+
+<div class="modal fade" id="AddModal" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Registro de usuario</h4>
+            </div>
+            {!! Form::open(['action' => 'LA\UsersController@store', 'id' => 'monitore-add-form']) !!}
+            <div class="modal-body">
+                <div class="box-body">
+                    {{--@la_form($module)--}}
+                    
+                    
+                    @la_input($module, 'name')
+                    @la_input($module, 'email')
+                    @la_input($module, 'password')
+                   
+                    
+                    <input type="hidden" name="vista" id="vista" value="home">    
+
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                {!! Form::submit( 'Registrar', ['class'=>'btn btn-success']) !!}
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+
 
 @endsection
 

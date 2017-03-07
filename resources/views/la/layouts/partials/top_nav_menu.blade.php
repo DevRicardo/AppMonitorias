@@ -7,6 +7,14 @@
 			@include('la.layouts.partials.menu_roles.menu_monitor')
 		@endrole
 
+		@role("SUPER_ADMIN")
+			@include('la.layouts.partials.menu_roles.menu_superadmin')
+		@endrole
+
+		@role("ADMINISTRATIVO")
+			@include('la.layouts.partials.menu_roles.menu_administrativo')
+		@endrole
+
 	
 	</ul>
 

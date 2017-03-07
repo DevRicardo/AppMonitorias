@@ -18,6 +18,9 @@ use Dwij\Laraadmin\Models\Module;
 use Dwij\Laraadmin\Models\ModuleFields;
 
 use App\User;
+use App\Role;
+use Mail;
+use Log;
 
 class UsersController extends Controller
 {
@@ -84,6 +87,27 @@ class UsersController extends Controller
 		}
 	}
 
+	public function store(Request $request)
+	{
+			$user = User::create([
+				'name' => $request->name,
+				'email' => $request->email,
+				'password' => bcrypt($request->password),
+				'context_id' => 0,
+				'type' => "Administrativo",
+			]);
+	
+			// update user role
+			$user->detachRoles();
+			$role = Role::find(5);
+			$user->attachRole($role);
+
+			if($user){
+				flash('Registro exitoso', 'success');
+				return redirect()->back();
+			}
+	}
+
 	
 	/**
 	 * Datatable Ajax fetch
@@ -92,7 +116,7 @@ class UsersController extends Controller
 	 */
 	public function dtajax()
 	{
-		$values = DB::table('users')->select($this->listing_cols)->whereNull('deleted_at');
+		$values = DB::table('users')->select($this->listing_cols)->where("type","Monitor")->whereNull('deleted_at')->orWhere("type","Administrativo");
 		$out = Datatables::of($values)->make();
 		$data = $out->getData();
 
