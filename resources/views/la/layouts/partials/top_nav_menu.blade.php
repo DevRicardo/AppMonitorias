@@ -15,6 +15,10 @@
 			@include('la.layouts.partials.menu_roles.menu_administrativo')
 		@endrole
 
+		@role("ESTUDIANTE")
+			@include('la.layouts.partials.menu_roles.menu_estudiante')
+		@endrole
+
 	
 	</ul>
 

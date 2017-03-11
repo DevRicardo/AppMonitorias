@@ -37,13 +37,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $module = Module::get('Monitores');
+        $module_monitor = Module::get('Monitores');
+        $module_estudiante = Module::get('Estudiantes');
+
         $roleCount = \App\Role::count();
 		if($roleCount != 0) {
 			if($roleCount != 0) {
 
 				return view('home',[
-                    'module' => $module
+                    'module_monitor' => $module_monitor,
+                    'module_estudiante' => $module_estudiante
                 ]);
 			}
 		} else {

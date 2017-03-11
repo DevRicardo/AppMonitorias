@@ -101,6 +101,8 @@
                 
                 <h3>
                 <a href="#" class="btn btn-lg btn-success" data-toggle="modal" data-target="#AddModal">Registrate como monitor!</a>
+
+                <a href="#" class="btn btn-lg btn-success" data-toggle="modal" data-target="#AddModalEstudiante">Registrate para tomar monitorias!</a>
                
                 </h3>
                 <br>
@@ -154,7 +156,7 @@
 </div><!--/ #introwrap -->
 
 
-
+<!-- FORMULARIO PARA EL REGISTRO DE MONITRES   -->
 <div class="modal fade" id="AddModal" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -168,14 +170,14 @@
                     {{--@la_form($module)--}}
                     
                     
-                    @la_input($module, 'tipo_doc')
-                    @la_input($module, 'numero_doc')
-                    @la_input($module, 'nombre_monitor')
-                    @la_input($module, 'email_monitor')
-                    @la_input($module, 'apellido_monitor')
-                    @la_input($module, 'facultad_id')
-                    @la_input($module, 'programa_id')
-                    @la_input($module, 'promedio_credito')
+                    @la_input($module_monitor, 'tipo_doc')
+                    @la_input($module_monitor, 'numero_doc')
+                    @la_input($module_monitor, 'nombre_monitor')
+                    @la_input($module_monitor, 'email_monitor')
+                    @la_input($module_monitor, 'apellido_monitor')
+                    @la_input($module_monitor, 'facultad_id')
+                    @la_input($module_monitor, 'programa_id')
+                    @la_input($module_monitor, 'promedio_credito')
                     
                     <input type="hidden" name="vista" id="vista" value="home">    
 
@@ -191,6 +193,51 @@
         </div>
     </div>
 </div>
+
+
+<!-- FORMULARIO PARA EL REGISTRO DE ESTUDIANTES  -->
+
+<div class="modal fade" id="AddModalEstudiante" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Añadir Estudiante</h4>
+            </div>
+            {!! Form::open(['action' => 'LA\EstudiantesController@store', 'id' => 'estudiante-add-form']) !!}
+            <div class="modal-body">
+                <div class="box-body">
+                     {{--@la_form($module)--}}
+                    
+                   
+                    @la_input($module_estudiante, 'tipo_doc')
+                    @la_input($module_estudiante, 'numero_doc')
+                    @la_input($module_estudiante, 'nombres_estudiante')
+                    @la_input($module_estudiante, 'apellidos_estudiante')
+                    @la_input($module_estudiante, 'email_estudiante')
+                    @la_input($module_estudiante, 'facultad_id')
+                    @la_input($module_estudiante, 'programa_id')
+                   <div class="form-group" style="display: none;">
+                    <input type="hidden" value="false" name="estado_hidden">
+                    <input class="form-control" checked="checked" name="estado" type="checkbox" value="estado">                                
+                    </div>
+                   
+                    
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                {!! Form::submit( 'Registrar', ['class'=>'btn btn-success']) !!}
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+
+
+
+
 
 
 

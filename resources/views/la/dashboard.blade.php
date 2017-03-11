@@ -14,6 +14,16 @@
         @endrole
 
 
+        @role("ADMINISTRADOR")
+          @include('la.layouts.partials.dashboard_roles.dashboard_administrador')
+        @endrole
+
+
+        @role("ESTUDIANTE")
+          @include('la.layouts.partials.dashboard_roles.dashboard_estudiante')
+        @endrole
+
+
         </section><!-- /.content -->
 @endsection
 
